@@ -45,7 +45,7 @@
     move_uploaded_file($_FILES['product_image']['tmp_name'], $destination);
 
     $sql = "UPDATE `products` SET `product_name` = '$productname',`product_description` = '$productdescription', `product_price` = '$productprice',`product_image` = '$productimage',`product_category_id` = '$productcategoryid'
-    WHERE `products`.`p_id` = $productid;";
+    WHERE `products`.`product_id` = $productid;";
     $result = mysqli_query($conn, $sql);
 
     header("Location: /ecommerce/admin/home.php");
