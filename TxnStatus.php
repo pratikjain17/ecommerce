@@ -38,7 +38,7 @@ if (isset($_POST["ORDER_ID"]) && $_POST["ORDER_ID"] != "") {
 
 <body>
   <h2>Transaction status query</h2>
-  <form method="post" action="">
+  <form method="post" action="transaction.php">
     <table border="1">
       <tbody>
         <tr>

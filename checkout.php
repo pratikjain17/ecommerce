@@ -41,8 +41,8 @@
       $result1 = mysqli_query($conn, $sql1);
       $row1 = mysqli_fetch_assoc($result1);
       $productPrice = $row1['product_price'];
-      $bill += $productPrice;
-      $_SESSION['cartBill'] = $bill;
+      // $bill += $productPrice;
+      // $_SESSION['cartBill'] = $bill;
     }
   }
 
@@ -89,7 +89,7 @@
     
     
     </form>
-    <h2 class ="my-3 py-3">Your total : RS. ' . $bill . ' </h2>
+    <h2 class ="my-3 py-3">Your total : RS. ' . $_SESSION['cartBill'] . ' </h2>
     </div>';
   } else {
     echo '<div class="container py-2 my-2">

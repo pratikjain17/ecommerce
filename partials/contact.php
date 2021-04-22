@@ -1,5 +1,5 @@
 <?php
-    echo '
+echo '
 <div class="container py-4 my-4">
     <div class="row">
         <div class="col">
@@ -7,19 +7,19 @@
                 <div class="card-header bg-primary text-white"><i class="fa fa-envelope"></i> Contact us.
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="" method="">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" required>
+                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email" required>
                             <small id="emailHelp" class="form-text text-muted">Well never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea class="form-control" id="message" rows="6" required></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
                         </div>
                         <div class="mx-auto">
                         <button type="submit" class="btn btn-primary text-right">Submit</button></div>
@@ -97,4 +97,3 @@
         </div>
     </div>
 </footer>';
-?>
