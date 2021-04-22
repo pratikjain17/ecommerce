@@ -40,15 +40,16 @@
     $productprice = $_POST['price'];
     $productcategoryid = $_POST['category'];
     $productdescription = $_POST['desc'];
-    $productimage = $_FILES['image']['name'];
-    $destination = "C:/xampp/htdocs/ecommerce/img/" . basename($_FILES['pic']['name']);
-    move_uploaded_file($_FILES['pic']['tmp_name'], $destination);
+    $productimage = $_FILES['product_image']['name'];
+    $destination = "C:/xampp/htdocs/ecommerce/img/" . basename($_FILES['product_image']['name']);
+    move_uploaded_file($_FILES['product_image']['tmp_name'], $destination);
 
     $sql = "INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_category_id`, `product_price`, `product_image`, `timestamp`) 
     VALUES (NULL, '$productname', '$productdescription', '$productcategoryid', '$productprice', '$productimage', current_timestamp());";
     $result = mysqli_query($conn, $sql);
 
     header("Location: /ecommerce/admin/home.php");
+    // echo $productimage;
   }
 
   ?>
@@ -74,7 +75,11 @@
 
   <div class="container">
     <h2>Add Product</h2>
-    <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+    <form method="post" enctype="multipart/form-data" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Product Image</label>
+        <input type="file" name="product_image" class="form-control">
+      </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Product Name</label>
         <input type="text" class="form-control" id="name" placeholder="" name="name" required>
@@ -102,15 +107,10 @@
         <label for="exampleFormControlTextarea1">Product Price</label>
         <input type="text" class="form-control" id="price" name="price" required>
       </div>
-      <div class="form-group">
-        <label for="exampleFormControlFile1">Product Image</label>
-        <input type="file" class="form-control-file" id="image" name="pic" required>
-      </div>
-      <button class="btn btn-success" type="submit">Submit</button>
+      <button class="btn btn-success" type="submit">Add</button>
 
     </form>
   </div>
-  <a href=""></a>
 
 
 
