@@ -33,6 +33,26 @@
   <!-- database yaha connect karna -->
   <?php include "../partials/_dbconnect.php"; ?>
 
+  <?php
+  $error = "";
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $productname = $_POST['name'];
+    $productprice = $_POST['price'];
+    $productcategoryid = $_POST['category'];
+    $productdescription = $_POST['desc'];
+    $productimage = $_FILES['image']['name'];
+    $destination = "C:/xampp/htdocs/ecommerce/img/" . basename($_FILES['pic']['name']);
+    move_uploaded_file($_FILES['pic']['tmp_name'], $destination);
+
+    $sql = "INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_category_id`, `product_price`, `product_image`, `timestamp`) 
+    VALUES (NULL, '$productname', '$productdescription', '$productcategoryid', '$productprice', '$productimage', current_timestamp());";
+    $result = mysqli_query($conn, $sql);
+
+    header("Location: /ecommerce/admin/home.php");
+  }
+
+  ?>
+
 
 
 
@@ -53,39 +73,42 @@
   ?>
 
   <div class="container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" class="text-center">#</th>
-          <th scope="col" class="text-center">Category Image</th>
-          <th scope="col" class="text-center">Category Name</th>
-          <th scope="col" class="text-center">Catgeory Descritpion</th>
-          <th scope="col" class="text-center">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        $sql = "SELECT * FROM `categories`";
-        $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-          $category_id = $row['category_id'];
-          $category_name = $row['category_name'];
-          $category_desc = $row['category_description'];
-          $category_image = $row['category_image'];
+    <h2>Add Product</h2>
+    <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Product Name</label>
+        <input type="text" class="form-control" id="name" placeholder="" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Product Description</label>
+        <textarea class="form-control" id="desc" name="desc" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Product Category</label>
+        <select class="form-control" id="category" name="category" required>
+          <?php
+          $sql = "SELECT * FROM `categories`";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result)) {
+            $category_id = $row['category_id'];
+            $category_name = $row['category_name'];
 
-          // categories will be displayed over here 
-          echo ' <tr>
-          <th scope="row" class="text-center">' . $category_id . '</th>
-          <td class="text-center"><img src="../img/' . $category_image . '" alt="" class="category_image"></td>
-          <td class="text-center">' . $category_name . '</td>
-          <td class="text-center">' . $category_desc . '</td>
-          <td class="text-center"><a class="btn btn-success" href="category.php?catid=' . $category_id . '">Go</a></td>
-        </tr>';
-        }
-        ?>
-      </tbody>
-    </table>
+            echo '<option value="' . $category_id . '">' . $category_name . '</option>';
+          }
+          ?>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Product Price</label>
+        <input type="text" class="form-control" id="price" name="price" required>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Product Image</label>
+        <input type="file" class="form-control-file" id="image" name="pic" required>
+      </div>
+      <button class="btn btn-success" type="submit">Submit</button>
 
+    </form>
   </div>
   <a href=""></a>
 
