@@ -6,7 +6,8 @@ header("Expires: 0");
 require_once("./lib/config_paytm.php");
 require_once("./lib/encdec_paytm.php");
 include 'partials/_dbconnect.php';
-include 'partials/header.php';
+// include 'partials/header.php';
+session_start();
 
 $checkSum = "";
 $paramList = array();

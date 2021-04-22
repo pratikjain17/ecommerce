@@ -32,9 +32,9 @@
   <!-- header over here -->
   <?php include "partials/header.php"; ?>
   <?php
-    $bill = 0.00;
-    $numberOfItems = 0;
-    ?>
+  $bill = 0.00;
+  $numberOfItems = 0;
+  ?>
 
 
 
@@ -57,34 +57,34 @@
 
       <?php
 
-            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-                if (isset($_GET['productid'])) {
-                    $productid = $_GET['productid'];
-                    $user_id = $_SESSION['userid'];
-                    $product_quantity = 1;
-                    $sql = "INSERT INTO `cart` (`cart_product_id`, `product_id`, `user_id`,`quantity`, `timestamp`) VALUES (NULL, '$productid', '$user_id',`1`, current_timestamp());";
-                    $result = mysqli_query($conn, $sql);
-                    $sql1 = "SELECT * FROM `cart` WHERE `user_id` = $user_id";
-                    $result1 = mysqli_query($conn, $sql1);
-                    while ($row = mysqli_fetch_assoc($result1)) {
-                        $i = 1;
-                        $cartProductid = $row['cart_product_id'];
-                        $productid = $row['product_id'];
-                        $product_quantity = $row['quantity'];
-                        $sql2 = "SELECT * FROM `products` WHERE `product_id` = $productid";
-                        $result2 = mysqli_query($conn, $sql2);
-                        $product = mysqli_fetch_assoc($result2);
-                        $product_name = $product['product_name'];
-                        $product_desc = $product['product_description'];
-                        $product_category_id = $product['product_category_id'];
-                        $product_price = $product['product_price'];
-                        $product_image = $product['product_image'];
-                        $product_image = $product['product_image'];
-                        $bill += ($product_price * $product_quantity);
-                        $_SESSION['cartBill'] += ($product_price * $product_quantity);
-                        $numberOfItems = mysqli_num_rows($result2);
-                        $_SESSION['cartItems'] = mysqli_num_rows($result2);
-                        echo '<tbody>
+      if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+        if (isset($_GET['productid'])) {
+          $productid = $_GET['productid'];
+          $user_id = $_SESSION['userid'];
+          $product_quantity = 1;
+          $sql = "INSERT INTO `cart` (`cart_product_id`, `product_id`, `user_id`, `quantity`, `timestamp`) VALUES (NULL, '$productid', '$user_id', '1', current_timestamp());";
+          $result = mysqli_query($conn, $sql);
+          $sql1 = "SELECT * FROM `cart` WHERE `user_id` = $user_id";
+          $result1 = mysqli_query($conn, $sql1);
+          while ($row = mysqli_fetch_assoc($result1)) {
+            $i = 1;
+            $cartProductid = $row['cart_product_id'];
+            $productid = $row['product_id'];
+            $product_quantity = $row['quantity'];
+            $sql2 = "SELECT * FROM `products` WHERE `product_id` = $productid";
+            $result2 = mysqli_query($conn, $sql2);
+            $product = mysqli_fetch_assoc($result2);
+            $product_name = $product['product_name'];
+            $product_desc = $product['product_description'];
+            $product_category_id = $product['product_category_id'];
+            $product_price = $product['product_price'];
+            $product_image = $product['product_image'];
+            $product_image = $product['product_image'];
+            $bill += $product_price;
+            $_SESSION['cartBill'] += $product_price;
+            $numberOfItems = mysqli_num_rows($result2);
+            $_SESSION['cartItems'] = mysqli_num_rows($result2);
+            echo '<tbody>
                         <tr>
                             <td class="text-center">' . $i . '</td>
                             <td class="text-center">' . $productid . '</td>
@@ -100,31 +100,31 @@
                         </tr>
                     </tbody>
                     ';
-                        $i++;
-                    }
-                } else if (isset($_GET['usercart']) && $_GET['usercart'] == $_SESSION['userid']) {
-                    $user_id = $_SESSION['userid'];
-                    $product_quantity;
-                    $sql1 = "SELECT * FROM `cart` WHERE `user_id` = $user_id";
-                    $result1 = mysqli_query($conn, $sql1);
-                    while ($row = mysqli_fetch_assoc($result1)) {
-                        $i = 1;
-                        $cartProductid = $row['cart_product_id'];
-                        $product_quantity = $row['quantity'];
-                        $productid = $row['product_id'];
-                        $sql2 = "SELECT * FROM `products` WHERE `product_id` = $productid";
-                        $result2 = mysqli_query($conn, $sql2);
-                        $product = mysqli_fetch_assoc($result2);
-                        $product_name = $product['product_name'];
-                        $product_desc = $product['product_description'];
-                        $product_category_id = $product['product_category_id'];
-                        $product_price = $product['product_price'];
-                        $product_image = $product['product_image'];
-                        $bill += ($product_price * $product_quantity);
-                        $_SESSION['cartBill'] += ($product_price * $product_quantity);
-                        $numberOfItems = mysqli_num_rows($result2);
-                        $_SESSION['cartItems'] = mysqli_num_rows($result2);
-                        echo '<tbody>
+            $i++;
+          }
+        } else if (isset($_GET['usercart']) && $_GET['usercart'] == $_SESSION['userid']) {
+          $user_id = $_SESSION['userid'];
+          $product_quantity;
+          $sql1 = "SELECT * FROM `cart` WHERE `user_id` = $user_id";
+          $result1 = mysqli_query($conn, $sql1);
+          while ($row = mysqli_fetch_assoc($result1)) {
+            $i = 1;
+            $cartProductid = $row['cart_product_id'];
+            $product_quantity = $row['quantity'];
+            $productid = $row['product_id'];
+            $sql2 = "SELECT * FROM `products` WHERE `product_id` = $productid";
+            $result2 = mysqli_query($conn, $sql2);
+            $product = mysqli_fetch_assoc($result2);
+            $product_name = $product['product_name'];
+            $product_desc = $product['product_description'];
+            $product_category_id = $product['product_category_id'];
+            $product_price = $product['product_price'];
+            $product_image = $product['product_image'];
+            $bill += ($product_price * $product_quantity);
+            $_SESSION['cartBill'] += ($product_price * $product_quantity);
+            $numberOfItems = mysqli_num_rows($result2);
+            $_SESSION['cartItems'] = mysqli_num_rows($result2);
+            echo '<tbody>
                         <tr>
                             <td class="text-center">' . $i . '</td>
                             <td class="text-center">' . $productid . '</td>
@@ -141,14 +141,14 @@
                         </tr>
                     </tbody>
                    ';
-                        $i++;
-                    }
-                    // header("Location: /Baby Choice/index.php");
-                }
-            } else {
-                echo 'You are not logged in to view the cart';
-            }
-            ?>
+            $i++;
+          }
+          // header("Location: /Baby Choice/index.php");
+        }
+      } else {
+        echo 'You are not logged in to view the cart';
+      }
+      ?>
 
 
 
