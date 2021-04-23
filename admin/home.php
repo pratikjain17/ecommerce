@@ -85,6 +85,9 @@
       <li class="nav-item">
         <a class="nav-link" href="suggestions.php">Suggestions</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="users.php">Users</a>
+      </li>
     </ul>
   </div>
 

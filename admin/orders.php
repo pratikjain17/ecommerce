@@ -28,6 +28,11 @@
     width: 100px;
     height: 100px;
   }
+
+  .img {
+    width: 100px;
+    height: 100px;
+  }
   </style>
 </head>
 
@@ -85,6 +90,9 @@
       <li class="nav-item">
         <a class="nav-link" href="suggestions.php">Suggestions</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="users.php">Users</a>
+      </li>
     </ul>
   </div>
 
@@ -93,44 +101,52 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col" class="text-center">#</th>
-          <th scope="col" class="text-center">Category Image</th>
-          <th scope="col" class="text-center">Category Name</th>
-          <th scope="col" class="text-center">Catgeory Descritpion</th>
-          <th scope="col" class="text-center">Action</th>
+          <th>Order id</th>
+          <th>User Email</th>
+          <th>Order Amount</th>
+          <th>Order Status</th>
         </tr>
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM `categories`";
+        $sql = "SELECT * FROM orders";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
-          $category_id = $row['category_id'];
-          $category_name = $row['category_name'];
-          $category_desc = $row['category_description'];
-          $category_image = $row['category_image'];
+          $orderid = $row['order_id'];
+          $userid = $row['user_id'];
+          $amount = $row['order_amount'];
+          $status = $row['order_status'];
+          $sql1 = "SELECT * FROM `users` WHERE `user_id` = $userid";
+          $result1 = mysqli_query($conn, $sql1);
+          $row1 = mysqli_fetch_assoc($result1);
+          $user_email = $row1['user_email'];
+          $sql2 = "SELECT * FROM `cart` WHERE `user_id` = $userid";
+          $result2 = mysqli_query($conn, $sql2);
+          $row2 = mysqli_fetch_assoc($result2);
+          $productid = $row2['product_id'];
+          $quantity = $row2['quantity'];
+          $sql3 = "SELECT * FROM `products` WHERE `product_id` = $productid";
+          $result3 = mysqli_query($conn, $sql3);
+          $row3 = mysqli_fetch_assoc($result3);
+          $product_name = $row3['product_name'];
+          $product_image = $row3['product_image'];
+          $product_price = $row3['product_price'];
 
           // categories will be displayed over here 
-          echo ' <tr>
-          <th scope="row" class="text-center">' . $category_id . '</th>
-          <td class="text-center"><img src="../img/' . $category_image . '" alt="" class="category_image"></td>
-          <td class="text-center">' . $category_name . '</td>
-          <td class="text-center">' . $category_desc . '</td>
-          <td class="text-center"><a class="btn btn-success" href="category.php?catid=' . $category_id . '">Go</a>
-          <a class="btn btn-warning" href="updateCategory.php?catid=' . $category_id . '"><i class="fas fa-edit"></i></a>
-          <a class="btn btn-danger" href="deleteCategory.php?catid=' . $category_id . '"><i class="far fa-trash-alt"></i></a></td>
-        </tr>';
+          echo '    <tr>
+                      <td>' . $orderid . '</td>
+                      <td>' . $user_email . '</td>
+                      <td>' . $amount . '</td>
+                      <td>' . $status . '</td>
+                      <td><a href="deleteorder.php?orderid=' . $orderid . '" class="fa fa-trash" style="float: right;"></a>
+                      <a href="deliverorder.php?orderid=' . $orderid . '" class="fa fa-edit" style="float: right;"></a></td>
+                    </tr>';
         }
         ?>
       </tbody>
     </table>
 
   </div>
-  <a href=""></a>
-
-
-
-
   <?php include "../partials/footer.php" ?>
 
 

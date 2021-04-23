@@ -1,35 +1,35 @@
 <?php
 session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    $user_id = $_SESSION['userid'];
-    $userid = $_SESSION['userid'];
-    $_SESSION['cartBill'] = 0.00;
-    $_SESSION['cartItems'] = 0;
-    $bill = 0.00;
-    $numberOfItems = 0;
-    $sql1 = "SELECT * FROM `cart` WHERE `user_id` = $user_id";
-    $result1 = mysqli_query($conn, $sql1);
-    while ($row = mysqli_fetch_assoc($result1)) {
-        // print_r($row);
-        $cartquantity = $row['quantity'];
-        $cartProductid = $row['cart_product_id'];
-        $pid = $row['product_id'];
-        $sql2 = "SELECT * FROM `products` WHERE `product_id` = $pid";
-        $result2 = mysqli_query($conn, $sql2);
-        $product = mysqli_fetch_assoc($result2);
-        $product_name = $product['product_name'];
-        $product_desc = $product['product_description'];
-        $product_category_id = $product['product_category_id'];
-        $product_price = $product['product_price'];
-        $product_image = $product['product_image'];
-        // $bill += ($product_discountprice * $cartquantity);
-        $_SESSION['cartBill'] += ($product_price * $cartquantity);
-        // $numberOfItems = mysqli_num_rows($result2);
-        // $_SESSION['cartItems'] = mysqli_num_rows($result2);
+  $user_id = $_SESSION['userid'];
+  $userid = $_SESSION['userid'];
+  $_SESSION['cartBill'] = 0.00;
+  $_SESSION['cartItems'] = 0;
+  $bill = 0.00;
+  $numberOfItems = 0;
+  $sql1 = "SELECT * FROM `cart` WHERE `user_id` = $user_id";
+  $result1 = mysqli_query($conn, $sql1);
+  while ($row = mysqli_fetch_assoc($result1)) {
+    // print_r($row);
+    $cartquantity = $row['quantity'];
+    $cartProductid = $row['cart_product_id'];
+    $pid = $row['product_id'];
+    $sql2 = "SELECT * FROM `products` WHERE `product_id` = $pid";
+    $result2 = mysqli_query($conn, $sql2);
+    $product = mysqli_fetch_assoc($result2);
+    $product_name = $product['product_name'];
+    $product_desc = $product['product_description'];
+    $product_category_id = $product['product_category_id'];
+    $product_price = $product['product_price'];
+    $product_image = $product['product_image'];
+    // $bill += ($product_discountprice * $cartquantity);
+    $_SESSION['cartBill'] += ($product_price * $cartquantity);
+    // $numberOfItems = mysqli_num_rows($result2);
+    // $_SESSION['cartItems'] = mysqli_num_rows($result2);
 
-    }
+  }
 } else {
-    $userid = 0;
+  $userid = 0;
 }
 ?>
 <?php
@@ -46,7 +46,7 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact.php">Contact us</a>
+          <a class="nav-link" href="#contactForm">Contact us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About us</a>
@@ -60,17 +60,25 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
 $sql = "SELECT * FROM `categories`";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
-    echo '<a class="dropdown-item" href="category.php?catid=' . $row['category_id'] . '">' .
-        $row['category_name'] . '</a>';
+  echo '<a class="dropdown-item" href="category.php?catid=' . $row['category_id'] . '">' .
+    $row['category_name'] . '</a>';
 };
 echo '</ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item">';
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+  echo '
           <a class="nav-link" href="myCart.php?usercart=' . $_SESSION['userid'] . '" tabindex="-1">Your Cart</a>
         </li>
       </ul>';
+} else {
+  echo '
+          <a class="nav-link" href="myCart.php?usercart=0" tabindex="-1">Your Cart</a>
+        </li>
+      </ul>';
+}
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    echo ' <form class="d-flex" action="/ecommerce/search.php" method="get">
+  echo ' <form class="d-flex" action="/ecommerce/search.php" method="get">
         <input class="form-control me-2" type="search" placeholder="Search" name="query" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
@@ -79,7 +87,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     <a href="partials/_logout.php" class="btn btn-danger ml-2">Logout</a>
 </nav>';
 } else {
-    echo '<form class="d-flex" action="/ecommerce/search.php" method="get">
+  echo '<form class="d-flex" action="/ecommerce/search.php" method="get">
   <input class="form-control me-2" type="search" placeholder="Search" name="query" aria-label="Search">
   <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
@@ -101,13 +109,18 @@ include 'partials/signupModal.php';
 include 'partials/adminLoginModal.php';
 
 if (isset($_GET['signupSuccess']) && $_GET['signupSuccess'] == "true") {
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Successfully done: </strong> You can now login.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
 }
 if (isset($_GET['error']) && $_GET['error'] == "Unable to login") {
-    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
   Email or password is not correct || Unable to login
+</div>';
+}
+if (isset($_GET['contact']) && $_GET['contact'] == true) {
+  echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Contact message has been sent
 </div>';
 }

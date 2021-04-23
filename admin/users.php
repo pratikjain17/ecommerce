@@ -83,10 +83,10 @@
         <a class="nav-link" href="orders.php">Orders</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="suggestions.php">Suggestions</a>
+        <a class="nav-link" href="suggestions.php">Suggestions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="users.php">Users</a>
+        <a class="nav-link active" aria-current="page" href=" users.php">Users</a>
       </li>
     </ul>
   </div>
@@ -97,29 +97,32 @@
       <thead>
         <tr>
           <th scope="col" class="text-center">#</th>
-          <th scope="col" class="text-center">Contact Name</th>
-          <th scope="col" class="text-center">Contact Email</th>
-          <th scope="col" class="text-center">Contact Message</th>
+          <th scope="col" class="text-center">User Name</th>
+          <th scope="col" class="text-center">User Email</th>
+          <th scope="col" class="text-center">User Address</th>
+          <th scope="col" class="text-center">User Phone</th>
           <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM `contact`";
+        $sql = "SELECT * FROM `users`";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
-          $contactname = $row['contact_name'];
-          $contactid = $row['contact_id'];
-          $contactemail = $row['contact_email'];
-          $contactmessage = $row['contact_message'];
+          $user_id = $row['user_id'];
+          $user_name = $row['user_name'];
+          $user_email = $row['user_email'];
+          $user_address = $row['user_address'];
+          $user_phone = $row['user_phone'];
 
           // categories will be displayed over here 
           echo ' <tr>
-          <th scope="row" class="text-center">' . $contactid . '</th>
-          <td class="text-center">' . $contactname . '</td>
-          <td class="text-center">' . $contactemail . '</td>
-          <td class="text-center">' . $contactmessage . '</td>
-          <td class="text-center"><a class="btn btn-success" href="contactReply.php">REPLY</a></td>
+          <th scope="row" class="text-center">' . $user_id . '</th>
+          <td class="text-center">' . $user_name . '</td>
+          <td class="text-center">' . $user_email . '</td>
+          <td class="text-center">' . $user_address . '</td>
+          <td class="text-center">' . $user_phone . '</td>
+          <td class="text-center"><a class="btn btn-danger" href="deleteusers.php?userid=' . $user_id . '">Delete</a></td>
         </tr>';
         }
         ?>

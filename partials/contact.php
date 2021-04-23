@@ -1,13 +1,27 @@
 <?php
+$error = "";
+include "_dbconnect.php";
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    $sql = "INSERT INTO `contact` (`contact_id`, `contact_name`, `contact_email`, `contact_message`, `contact_time`) 
+    VALUES (NULL, '$name', '$email', '$message', current_timestamp());";
+    $result = mysqli_query($conn, $sql);
+    header("Location: /ecommerce/index.php?contact=true");
+}
+?>
+<?php
 echo '
-<div class="container py-4 my-4">
+<div class="container py-4 my-4" id="contactForm">
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header bg-primary text-white"><i class="fa fa-envelope"></i> Contact us.
                 </div>
                 <div class="card-body">
-                    <form action="" method="">
+                    <form action="" method="post">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" name="name" required>
