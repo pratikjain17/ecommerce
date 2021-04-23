@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <title>Sync Commerce</title>
 </head>
@@ -28,14 +30,14 @@
   <div class="container my-3 search">
     <h2>Search results for <em>"<?php echo $_GET['query']; ?>"</em></h2>
     <?php
-        $keyword = $_GET['query'];
-        $sql = "SELECT * FROM `synccommerce`.`products` WHERE (CONVERT(`product_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_name` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_description` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_category_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_price` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_image` USING utf8) LIKE '%$keyword%' OR CONVERT(`timestamp` USING utf8) LIKE '%$keyword%')";
-        $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $id = $row['product_id'];
-            $title = $row['product_name'];
-            $desc = $row['product_description'];
-            echo ' <div class="result my-3">
+    $keyword = $_GET['query'];
+    $sql = "SELECT * FROM `synccommerce`.`products` WHERE (CONVERT(`product_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_name` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_description` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_category_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_price` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_image` USING utf8) LIKE '%$keyword%' OR CONVERT(`timestamp` USING utf8) LIKE '%$keyword%')";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+      $id = $row['product_id'];
+      $title = $row['product_name'];
+      $desc = $row['product_description'];
+      echo ' <div class="result my-3">
             <div class="media my-3" id="question">
                 <div class="media-body">
                     <h5 class="mt-0">
@@ -45,8 +47,8 @@
                 </div>
             </div>
         </div>';
-        }
-        ?>
+    }
+    ?>
 
   </div>
 

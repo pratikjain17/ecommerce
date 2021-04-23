@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <title>Ecommerce</title>
   <style>
@@ -47,9 +49,15 @@
             <h6 class = "my-2 mx-2" style="color:white;">Welcome Admin <br>' . $_SESSION['adminEmail'] . '</h6>
             <a href = "partials/_logout.php" class="btn btn-danger ml-2">Logout</a>
             <a href = "addProduct.php" class="btn btn-warning ml-2">Add a product</a>
+            <a href = "addCategory.php" class="btn btn-success ml-2">Add a Category</a>
           </form>';
   }
   echo '</nav>';
+  if (isset($_GET['updatesuccess']) && $_GET['updatesuccess'] == true) {
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Update successful
+</div>';
+  }
   ?>
 
   <div class="container">
@@ -79,7 +87,9 @@
           <td class="text-center"><img src="../img/' . $category_image . '" alt="" class="category_image"></td>
           <td class="text-center">' . $category_name . '</td>
           <td class="text-center">' . $category_desc . '</td>
-          <td class="text-center"><a class="btn btn-success" href="category.php?catid=' . $category_id . '">Go</a></td>
+          <td class="text-center"><a class="btn btn-success" href="category.php?catid=' . $category_id . '">Go</a>
+          <a class="btn btn-warning" href="updateCategory.php?catid=' . $category_id . '">U</a>
+          <a class="btn btn-danger" href="deleteCategory.php?catid=' . $category_id . '">D</a></td>
         </tr>';
         }
         ?>

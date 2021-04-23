@@ -2,32 +2,36 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-    <title>Products</title>
-    <style>
-        .container {
-            min-height: 90%;
-        }
-    </style>
+  <title>Products</title>
+  <style>
+  .container {
+    min-height: 90%;
+  }
+  </style>
 </head>
 
 <body>
-    <?php include "partials/_dbconnect.php"; ?>
+  <?php include "partials/_dbconnect.php"; ?>
 
-    <!-- header over here -->
-    <?php include "partials/header.php"; ?>
+  <!-- header over here -->
+  <?php include "partials/header.php"; ?>
 
-    <!-- Taking the product from the get request of product id. -->
-    <?php
+  <!-- Taking the product from the get request of product id. -->
+  <?php
     $productid = $_GET['productid'];
     $sql = "SELECT * FROM `products` WHERE `product_id` = $productid";
     $result = mysqli_query($conn, $sql);
@@ -43,7 +47,7 @@
 
     ?>
 
-    <?php
+  <?php
     $method = $_SERVER['REQUEST_METHOD'];
     $showAlert = false;
     if ($method == 'POST') {
@@ -62,21 +66,23 @@
     }
     ?>
 
-    <div class="container my-3 py-0">
-        <div class="jumbotron py-3">
-            <img src="img/<?php echo $product_image ?>" class="card-img-top" style="width:100%;height:400px">
-            <h1 class="display-5"><?php echo $product_name ?></h1>
-            <p class="lead"><?php echo $product_desc ?></p>
-            <hr class="my-3">
-            <p class="lead"><b> Price : Rs.<?php echo $product_price ?>/-</b></p>
-            <p class="lead">
-                <a class="btn btn-success btn-lg" href="checkout.php?productid=<?php echo $productid ?>" role="button">Buy Now</a>
-                <a class="btn btn-danger btn-lg" href="myCart.php?productid=<?php echo $product_id; ?>" role="button">Add to Cart</a>
-            </p>
-        </div>
+  <div class="container my-3 py-0">
+    <div class="jumbotron py-3">
+      <img src="img/<?php echo $product_image ?>" class="card-img-top" style="width:100%;height:400px">
+      <h1 class="display-5"><?php echo $product_name ?></h1>
+      <p class="lead"><?php echo $product_desc ?></p>
+      <hr class="my-3">
+      <p class="lead"><b> Price : Rs.<?php echo $product_price ?>/-</b></p>
+      <p class="lead">
+        <a class="btn btn-success btn-lg" href="checkout.php?productid=<?php echo $productid ?>" role="button">Buy
+          Now</a>
+        <a class="btn btn-danger btn-lg" href="myCart.php?productid=<?php echo $product_id; ?>" role="button">Add to
+          Cart</a>
+      </p>
     </div>
+  </div>
 
-    <?php
+  <?php
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         echo ' <div class="container">
         <h2>Post a comment/review on this product</h2>
@@ -99,11 +105,11 @@
 
     ?>
 
-    <br>
+  <br>
 
-    <div class="container">
-        <h2>Comments/Reviews</h2>
-        <?php
+  <div class="container">
+    <h2>Comments/Reviews</h2>
+    <?php
         $productid = $_GET['productid'];
         $sql = "SELECT * FROM `comments` WHERE `product_id`=$productid";
         $result = mysqli_query($conn, $sql);
@@ -138,17 +144,18 @@
         }
 
         ?>
-    </div>
+  </div>
 
 
 
 
-    <?php include "partials/footer.php"; ?>
-    <!-- Optional JavaScript; choose one of the two! -->
+  <?php include "partials/footer.php"; ?>
+  <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
-    </script>
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+  </script>
 
 </body>
 

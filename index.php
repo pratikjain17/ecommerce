@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <style>
   .category_image {
     width: 100%;
@@ -55,16 +57,16 @@
     <h3 class="text-center py-2">Our Categories</h3>
     <div class="category container row">
       <?php
-            $sql = "SELECT * FROM `categories`";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $category_id = $row['category_id'];
-                $category_name = $row['category_name'];
-                $category_desc = $row['category_description'];
-                $category_image = $row['category_image'];
+      $sql = "SELECT * FROM `categories`";
+      $result = mysqli_query($conn, $sql);
+      while ($row = mysqli_fetch_assoc($result)) {
+        $category_id = $row['category_id'];
+        $category_name = $row['category_name'];
+        $category_desc = $row['category_description'];
+        $category_image = $row['category_image'];
 
-                // categories will be displayed over here 
-                echo '<div class="col-md-4 my-2" style="display:inline-block;">
+        // categories will be displayed over here 
+        echo '<div class="col-md-4 my-2" style="display:inline-block;">
                 <div class="card gal--animation gal--part' . $category_id . '" style="width: 18rem;">
                     <img src="img/' . $category_image . '" class="card-img-top category_image" alt="...">
                     <div class="card-body">
@@ -74,8 +76,8 @@
                     </div>
                 </div>
             </div>';
-            }
-            ?>
+      }
+      ?>
       <!-- <div class="col-md-4 my-2" style="display:inline-block;">
                 <div class="card" style="width: 18rem;">
                     <img src="https://source.unsplash.com/2400x800/?fashion,shirts" class="card-img-top" alt="...">

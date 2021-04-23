@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <title>Products</title>
   <style>
@@ -30,14 +32,14 @@
 
   <!-- Taking the category from the category table -->
   <?php
-    $catid = $_GET['catid'];
-    $sql = "SELECT * FROM `categories` WHERE `category_id`=$catid";
-    $result = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-        $catname = $row['category_name'];
-        $catdesc = $row['category_description'];
-    }
-    ?>
+  $catid = $_GET['catid'];
+  $sql = "SELECT * FROM `categories` WHERE `category_id`=$catid";
+  $result = mysqli_query($conn, $sql);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $catname = $row['category_name'];
+    $catdesc = $row['category_description'];
+  }
+  ?>
 
 
 
@@ -46,20 +48,20 @@
     <h3 class="text-center py-2">Products</h3>
     <div class="product container row">
       <?php
-            $catid = $_GET['catid'];
-            $sql = "SELECT * FROM `products` WHERE `product_category_id`=$catid";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $noResult = false;
-                $product_id = $row['product_id'];
-                $product_name = $row['product_name'];
-                $product_description = $row['product_description'];
-                $product_price = $row['product_price'];
-                $product_image = $row['product_image'];
+      $catid = $_GET['catid'];
+      $sql = "SELECT * FROM `products` WHERE `product_category_id`=$catid";
+      $result = mysqli_query($conn, $sql);
+      while ($row = mysqli_fetch_assoc($result)) {
+        $noResult = false;
+        $product_id = $row['product_id'];
+        $product_name = $row['product_name'];
+        $product_description = $row['product_description'];
+        $product_price = $row['product_price'];
+        $product_image = $row['product_image'];
 
 
-                // products will be displayed over here 
-                echo '<div class="col-md-4 my-2" style="display:inline-block;">
+        // products will be displayed over here 
+        echo '<div class="col-md-4 my-2" style="display:inline-block;">
                 <div class="card" style="width: 18rem;">
                     <img src="img/' . $product_image . '" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -72,16 +74,16 @@
                 </div>
             </div>';
 
-                if ($noResult) {
-                    echo '<div class="jumbotron jumbotron-fluid">
+        if ($noResult) {
+          echo '<div class="jumbotron jumbotron-fluid">
                 <div class="container">
                   <h1 class="display-5">No Products found</h1>
                   <p class="lead">Please browse other categories</p>
                 </div>
               </div>';
-                }
-            }
-            ?>
+        }
+      }
+      ?>
       <!-- <div class="col-md-4 my-2" style="display:inline-block;">
                 <div class="card" style="width: 18rem;">
                     <img src="https://source.unsplash.com/2400x800/?fashion,shirts" class="card-img-top" alt="...">

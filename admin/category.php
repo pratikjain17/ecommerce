@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <title>Ecommerce</title>
   <style>
@@ -37,20 +39,20 @@
 
 
   <?php
-    session_start();
-    echo '  <nav class="navbar navbar-dark bg-primary">
+  session_start();
+  echo '  <nav class="navbar navbar-dark bg-primary">
         <a class="navbar-brand" href="">
             <h2><i class="fas fa-school"></i> Ecommerce</h2>
         </a>';
-    if (isset($_SESSION['adminloggedin']) && $_SESSION['adminloggedin'] == true) {
-        echo '<form class="form-inline my-2 my-lg-0" method="get">
+  if (isset($_SESSION['adminloggedin']) && $_SESSION['adminloggedin'] == true) {
+    echo '<form class="form-inline my-2 my-lg-0" method="get">
             <h6 class = "my-2 mx-2" style="color:white;">Welcome Admin <br>' . $_SESSION['adminEmail'] . '</h6>
             <a href = "partials/_logout.php" class="btn btn-danger ml-2">Logout</a>
             <a href = "addProduct.php" class="btn btn-warning ml-2">Add a product</a>
           </form>';
-    }
-    echo '</nav>';
-    ?>
+  }
+  echo '</nav>';
+  ?>
 
   <div class="container">
     <table class="table">
@@ -66,20 +68,20 @@
       </thead>
       <tbody>
         <?php
-                $catid = $_GET['catid'];
-                $sql = "SELECT * FROM `products` WHERE `product_category_id`=$catid";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $noResult = false;
-                    $product_id = $row['product_id'];
-                    $product_name = $row['product_name'];
-                    $product_description = $row['product_description'];
-                    $product_price = $row['product_price'];
-                    $product_image = $row['product_image'];
+        $catid = $_GET['catid'];
+        $sql = "SELECT * FROM `products` WHERE `product_category_id`=$catid";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+          $noResult = false;
+          $product_id = $row['product_id'];
+          $product_name = $row['product_name'];
+          $product_description = $row['product_description'];
+          $product_price = $row['product_price'];
+          $product_image = $row['product_image'];
 
 
-                    // products will be displayed over here 
-                    echo ' <tr>
+          // products will be displayed over here 
+          echo ' <tr>
           <th scope="row" class="text-center">' . $product_id . '</th>
           <td class="text-center"><img src="../img/' . $product_image . '" alt="" class="category_image"></td>
           <td class="text-center">' . $product_name . '</td>
@@ -89,16 +91,16 @@
           <a class="btn btn-warning" href="updateProduct.php?productid=' . $product_id . '">Update</a></td>
         </tr>';
 
-                    if ($noResult) {
-                        echo '<div class="jumbotron jumbotron-fluid">
+          if ($noResult) {
+            echo '<div class="jumbotron jumbotron-fluid">
                 <div class="container">
                   <h1 class="display-5">No Products found</h1>
                   <p class="lead">Please browse other categories</p>
                 </div>
               </div>';
-                    }
-                }
-                ?>
+          }
+        }
+        ?>
       </tbody>
     </table>
   </div>
