@@ -58,7 +58,36 @@
   Update successful
 </div>';
   }
+  if (isset($_GET['updatesuccess']) && $_GET['updatesuccess'] == false) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  Update Not successful
+</div>';
+  }
+  if (isset($_GET['catadded']) && $_GET['catadded'] == true) {
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Category succesfully added
+</div>';
+  }
+  if (isset($_GET['catadded']) && $_GET['catadded'] == false) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  Adding Category failed
+</div>';
+  }
   ?>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.php">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="suggestions.php">Suggestions</a>
+      </li>
+    </ul>
+  </div>
+
 
   <div class="container">
     <table class="table">
@@ -88,8 +117,8 @@
           <td class="text-center">' . $category_name . '</td>
           <td class="text-center">' . $category_desc . '</td>
           <td class="text-center"><a class="btn btn-success" href="category.php?catid=' . $category_id . '">Go</a>
-          <a class="btn btn-warning" href="updateCategory.php?catid=' . $category_id . '">U</a>
-          <a class="btn btn-danger" href="deleteCategory.php?catid=' . $category_id . '">D</a></td>
+          <a class="btn btn-warning" href="updateCategory.php?catid=' . $category_id . '"><i class="fas fa-edit"></i></a>
+          <a class="btn btn-danger" href="deleteCategory.php?catid=' . $category_id . '"><i class="far fa-trash-alt"></i></a></td>
         </tr>';
         }
         ?>

@@ -7,24 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <title>Ecommerce</title>
   <style>
-    .bodycon {
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-    }
+  .bodycon {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .category_image {
-      width: 100px;
-      height: 100px;
-    }
+  .category_image {
+    width: 100px;
+    height: 100px;
+  }
   </style>
 </head>
 
@@ -66,6 +69,7 @@
             <h6 class = "my-2 mx-2" style="color:white;">Welcome Admin <br>' . $_SESSION['adminEmail'] . '</h6>
             <a href = "partials/_logout.php" class="btn btn-danger ml-2">Logout</a>
             <a href = "addProduct.php" class="btn btn-warning ml-2">Add a product</a>
+            <a href = "addCategory.php" class="btn btn-success ml-2">Add a Category</a>
           </form>';
   }
   echo '</nav>';
@@ -93,11 +97,13 @@
       </div>
       <div class=" form-group">
         <label for="exampleFormControlInput1">Product Name</label>
-        <input type="text" class="form-control" id="name" placeholder="" name="name" value="<?php echo $product_name ?>" required>
+        <input type="text" class="form-control" id="name" placeholder="" name="name" value="<?php echo $product_name ?>"
+          required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Product Description</label>
-        <textarea class="form-control" id="desc" name="desc" rows="3" value="" required><?php echo $product_description ?></textarea>
+        <textarea class="form-control" id="desc" name="desc" rows="3" value=""
+          required><?php echo $product_description ?></textarea>
       </div>
       <div class=" form-group">
         <label for="exampleFormControlSelect1">Product Category</label>
@@ -132,7 +138,8 @@
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
   </script>
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->
