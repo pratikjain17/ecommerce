@@ -65,7 +65,7 @@
   if (isset($_SESSION['adminloggedin']) && $_SESSION['adminloggedin'] == true) {
     echo '<form class="form-inline my-2 my-lg-0" method="get">
             <h6 class = "my-2 mx-2" style="color:white;">Welcome Admin <br>' . $_SESSION['adminEmail'] . '</h6>
-            <a href = "partials/_logout.php" class="btn btn-danger ml-2">Logout</a>
+            <a href = "../partials/_logout.php" class="btn btn-danger ml-2">Logout</a>
             <a href = "addProduct.php" class="btn btn-warning ml-2">Add a product</a>
             <a href = "addCategory.php" class="btn btn-success ml-2">Add a Category</a>
           </form>';
