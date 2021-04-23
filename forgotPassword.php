@@ -1,3 +1,46 @@
+<?php
+include "partials/_dbconnect.php";
+include 'sendmail.php';
+date_default_timezone_set("Asia/Kolkata");
+$success = "";
+$error = "";
+if (!empty($_POST['submit'])) {
+  $email = $_POST['forgotPassEmail'];
+  $result = mysqli_query($con, "SELECT * FROM `users` WHERE `user_email` = $email;");
+  $count = mysqli_num_rows($result);
+  if ($count > 0) {
+    $otp = rand(100000, 999999);
+    $mail_status  = sendOtp($email, $otp);
+
+    if ($mail_status == 1) {
+      $result = mysqli_query($conn, "INSERT INTO `otp` (`otp_id`, `otp`, `otp_is_expired`, `created_at`) VALUES (NULL, '$otp', '0', current_timestamp());");
+      $current_id = mysqli_insert_id($conn);
+
+      if (!empty($current_id)) {
+        $success = 1;
+      }
+    }
+  } else {
+    $error = "Email does not exists";
+  }
+}
+
+if (!empty($_POST['submit_otp'])) {
+  $result = mysqli_query($conn, "SELECT * FROM `otp` WHERE `otp` = $otp AND `otp_is_expired` != 1 AND NOW() <= DATE_ADD(created_at,INTERVAL 15 MINUTE)");
+  $count = mysqli_num_rows($result);
+  if (!empty($count)) {
+    $result = mysqli_query($conn, "UPDATE `otp` SET `otp_is_expired` = '1' WHERE `otp`.`otp_id` = 1;");
+    $success = 2;
+  } else {
+    $success = 1;
+    $error = "Invalid OTP";
+  }
+}
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -36,14 +79,33 @@
 
 
   <div class="container py-2 my-3 bodycon">
-    <form>
+    <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+      <?php
+      if (!empty($success == 1)) {
+
+      ?>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Enter OTP </label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="otp"
+          required>
+      </div>
+      <button type="submit" class="btn btn-primary" name="submit_otp">Verify OTP</button>
+      <?php } else if ($success == 2) { ?>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Enter New Password</label>
+        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          name="newPassword" required>
+      </div>
+      <button type="submit" class="btn btn-primary" name="submit_password">Confirm New Password</button>
+      <?php } else { ?>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Enter Email address For Verification</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
           name="forgotPassEmail" required>
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
       </div>
-      <button type="submit" class="btn btn-primary">Send OTP</button>
+      <button type="submit" class="btn btn-primary" name="submit">Send OTP</button>
+      <?php } ?>
     </form>
   </div>
 
