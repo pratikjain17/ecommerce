@@ -31,7 +31,9 @@
     <h2>Search results for <em>"<?php echo $_GET['query']; ?>"</em></h2>
     <?php
     $keyword = $_GET['query'];
-    $sql = "SELECT * FROM `synccommerce`.`products` WHERE (CONVERT(`product_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_name` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_description` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_category_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_price` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_image` USING utf8) LIKE '%$keyword%' OR CONVERT(`timestamp` USING utf8) LIKE '%$keyword%')";
+    $sql = "SELECT * FROM `synccommerce`.`products` WHERE (CONVERT(`product_id` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_name` USING utf8) LIKE '%$keyword%' OR 
+    CONVERT(`product_description` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_category_id` USING utf8) LIKE '%$keyword%' OR 
+    CONVERT(`product_price` USING utf8) LIKE '%$keyword%' OR CONVERT(`product_image` USING utf8) LIKE '%$keyword%' OR CONVERT(`timestamp` USING utf8) LIKE '%$keyword%')";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
       $id = $row['product_id'];
