@@ -32,39 +32,39 @@
 
   <!-- Taking the product from the get request of product id. -->
   <?php
-    $productid = $_GET['productid'];
-    $sql = "SELECT * FROM `products` WHERE `product_id` = $productid";
-    $result = mysqli_query($conn, $sql);
-    $noResult = false;
-    while ($row = mysqli_fetch_assoc($result)) {
-        $product_id = $row['product_id'];
-        $product_name = $row['product_name'];
-        $product_desc = $row['product_description'];
-        $product_category_id = $row['product_category_id'];
-        $product_price = $row['product_price'];
-        $product_image = $row['product_image'];
-    }
+  $productid = $_GET['productid'];
+  $sql = "SELECT * FROM `products` WHERE `product_id` = $productid";
+  $result = mysqli_query($conn, $sql);
+  $noResult = false;
+  while ($row = mysqli_fetch_assoc($result)) {
+    $product_id = $row['product_id'];
+    $product_name = $row['product_name'];
+    $product_desc = $row['product_description'];
+    $product_category_id = $row['product_category_id'];
+    $product_price = $row['product_price'];
+    $product_image = $row['product_image'];
+  }
 
-    ?>
+  ?>
 
   <?php
-    $method = $_SERVER['REQUEST_METHOD'];
-    $showAlert = false;
-    if ($method == 'POST') {
-        //Insert comment into comments table DB
-        $comment = $_POST['comment'];
-        $userid = $_POST['userid'];
-        $sql_query = "INSERT INTO `comments` (`comment_id`, `comment_content`, `product_id`, `comment_by`, `comment_time`) VALUES (NULL, '$comment', '$product_id', '$userid', current_timestamp());";
-        $result = mysqli_query($conn, $sql_query);
-        $showAlert = true;
-        if ($showAlert) {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  $method = $_SERVER['REQUEST_METHOD'];
+  $showAlert = false;
+  if ($method == 'POST') {
+    //Insert comment into comments table DB
+    $comment = $_POST['comment'];
+    $userid = $_POST['userid'];
+    $sql_query = "INSERT INTO `comments` (`comment_id`, `comment_content`, `product_id`, `comment_by`, `comment_time`) VALUES (NULL, '$comment', '$product_id', '$userid', current_timestamp());";
+    $result = mysqli_query($conn, $sql_query);
+    $showAlert = true;
+    if ($showAlert) {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Successfully done </strong> Your comment has been added.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
               </div>';
-        }
     }
-    ?>
+  }
+  ?>
 
   <div class="container my-3 py-0">
     <div class="jumbotron py-3">
@@ -83,8 +83,8 @@
   </div>
 
   <?php
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-        echo ' <div class="container">
+  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    echo ' <div class="container">
         <h2>Post a comment/review on this product</h2>
         <form method="post" action="' . $_SERVER['REQUEST_URI'] . '">
             <div class="form-group">
@@ -96,35 +96,35 @@
 
         </form>
     </div>';
-    } else {
-        echo '<div class="container">
+  } else {
+    echo '<div class="container">
         <h2>Post a comment/review on this product</h2>
         <h4 class="py-2" style="color:red;">You are not logged in....Please Login to comment</h4>
 </div>';
-    }
+  }
 
-    ?>
+  ?>
 
   <br>
 
   <div class="container">
     <h2>Comments/Reviews</h2>
     <?php
-        $productid = $_GET['productid'];
-        $sql = "SELECT * FROM `comments` WHERE `product_id`=$productid";
-        $result = mysqli_query($conn, $sql);
-        $noResult = true;
-        while ($row = mysqli_fetch_assoc($result)) {
-            $noResult = false;
-            $id = $row['comment_id'];
-            $content = $row['comment_content'];
-            $comment_time = $row['comment_time'];
-            $comment_by = $row['comment_by'];
-            $sql2 = "select * from `users` where user_id = $comment_by";
-            $result2 = mysqli_query($conn, $sql2);
-            $row2 = mysqli_fetch_assoc($result2);
-            $useremail = $row2['user_email'];
-            echo '
+    $productid = $_GET['productid'];
+    $sql = "SELECT * FROM `comments` WHERE `product_id`=$productid";
+    $result = mysqli_query($conn, $sql);
+    $noResult = true;
+    while ($row = mysqli_fetch_assoc($result)) {
+      $noResult = false;
+      $id = $row['comment_id'];
+      $content = $row['comment_content'];
+      $comment_time = $row['comment_time'];
+      $comment_by = $row['comment_by'];
+      $sql2 = "select * from `users` where user_id = $comment_by";
+      $result2 = mysqli_query($conn, $sql2);
+      $row2 = mysqli_fetch_assoc($result2);
+      $useremail = $row2['user_email'];
+      echo '
         <div class="media py-3 my-3" id="question">
         <img class="mr-3" src="img/userdefault.png" width="50px" style="border:2px solid red; border-radius:50%" alt="Generic placeholder image">
         <div class="media-body">
@@ -132,18 +132,18 @@
             ' . $content . '
         </div>
     </div>';
-        }
+    }
 
-        if ($noResult) {
-            echo '<div class="jumbotron jumbotron-fluid">
+    if ($noResult) {
+      echo '<div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-5">No comments found</h1>
           <p class="lead">Be the first person to comment on this topic.</p>
         </div>
       </div>';
-        }
+    }
 
-        ?>
+    ?>
   </div>
 
 

@@ -21,6 +21,14 @@
   .container {
     min-height: 90%;
   }
+
+  .c-p {
+    height: 350px;
+  }
+
+  /* .c-b {
+    height: 400px;
+  } */
   </style>
 </head>
 
@@ -63,13 +71,36 @@
         // products will be displayed over here 
         echo '<div class="col-md-4 my-2" style="display:inline-block;">
                 <div class="card" style="width: 18rem;">
-                    <img src="img/' . $product_image . '" class="card-img-top" alt="...">
-                    <div class="card-body">
+                    
+                    
+                    <img src="img/' . $product_image . '" class="card-img-top c-p" alt="...">
+                    <div class="card-body c-b">
                         <h5 class="card-title">' . $product_name . '</h5>
                         <p class="card-text">' . $product_description . '</p>
                         <p>Price : ' . $product_price . '</p>
                         <a href="product.php?productid=' . $product_id . '" class="btn btn-primary">View</a>
                         <a href="myCart.php?productid=' . $product_id . '" class="btn btn-success">Add to cart</a>
+                        <br>
+                        <h5>Size : </h5>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="p-' . $product_id . '" id="p-' . $product_id . '1">
+                          <label class="form-check-label" for="p-' . $product_id . '1">
+                            Small
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="p-' . $product_id . '" id="p-' . $product_id . '2" checked>
+                          <label class="form-check-label" for="p-' . $product_id . '2">
+                            Medium
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="p-' . $product_id . '" id="p-' . $product_id . '2" >
+                          <label class="form-check-label" for="p-' . $product_id . '2">
+                            Large
+                          </label>
+                        </div>
+
                     </div>
                 </div>
             </div>';

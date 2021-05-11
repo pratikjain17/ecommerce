@@ -20,6 +20,14 @@
     width: 100%;
     height: 100px;
   }
+
+  .c-p {
+    height: 200px;
+  }
+
+  .c-a {
+    height: 400px;
+  }
   </style>
 </head>
 
@@ -33,13 +41,13 @@
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/slider_1.jpg" class="d-block w-100" alt="...">
+        <img src="img/slider_1.jpg" class="d-block w-100 c-a" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="img/slider_2.jpg" class="d-block w-100" alt="...">
+        <img src="img/slider_2.jpg" class="d-block w-100 c-a" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://source.unsplash.com/2400x800/?fashion,shirts" class="d-block w-100" alt="...">
+        <img src="https://source.unsplash.com/2400x800/?fashion,shirts" class="d-block w-100 c-a" alt="...">
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
@@ -68,7 +76,7 @@
         // categories will be displayed over here 
         echo '<div class="col-md-4 my-2" style="display:inline-block;">
                 <div class="card gal--animation gal--part' . $category_id . '" style="width: 18rem;">
-                    <img src="img/' . $category_image . '" class="card-img-top category_image" alt="...">
+                    <img src="img/' . $category_image . '" class="card-img-top c-p" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $category_name . '</h5>
                         <p class="card-text">' . $category_desc . '</p>
